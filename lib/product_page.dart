@@ -3,10 +3,12 @@ import 'package:intl/intl.dart';
 
 class ProductPage extends StatefulWidget {
   @override
-  _ProductPageState createState() => _ProductPageState();
+  State<ProductPage> createState() => _ProductPageState();
 }
 
-class _ProductPageState extends State<ProductPage> with SingleTickerProviderStateMixin {
+class _ProductPageState extends State<ProductPage>
+    with SingleTickerProviderStateMixin {
+  int _selectedIndex = 3;
   late TabController _tabController;
   String? _selectedWarehouse;
   DateTimeRange _selectedDateRange = DateTimeRange(
@@ -34,11 +36,33 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
     }
   }
 
+  String _getTitle() {
+    switch (_selectedIndex) {
+      case 0:
+        return 'Absensi';
+      case 1:
+        return 'News & Event';
+      case 2:
+        return 'Dashboard';
+      case 3:
+        return 'Produk';
+      case 4:
+        return 'Report';
+      default:
+        return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
+          Text(
+            _getTitle(),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.left,
+          ),
           TabBar(
             controller: _tabController,
             labelStyle: TextStyle(fontSize: 12.0),
@@ -46,17 +70,17 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
               Tab(text: 'Shipping In/Out'),
               Tab(text: 'Performa Produk'),
               Tab(text: 'Booked Area'),
-              ],
+            ],
           ),
           Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                _buildShippingInOutTab(),
-                _buildPerformaProdukTab(),
-                _buildBookedAreaTab(),
-              ],
-            ))
+              child: TabBarView(
+            controller: _tabController,
+            children: [
+              _buildShippingInOutTab(),
+              _buildPerformaProdukTab(),
+              _buildBookedAreaTab(),
+            ],
+          ))
         ],
       ),
     );
@@ -78,8 +102,13 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
                 _selectedWarehouse = newValue;
               });
             },
-            items: <String>['Gudang Multiguna 1', 'Gudang Multiguna 2', 'Gudang KIG Q', 'Gudang KIG FB', 'Gudang KIG Beton']
-                .map<DropdownMenuItem<String>>((String value) {
+            items: <String>[
+              'Gudang Multiguna 1',
+              'Gudang Multiguna 2',
+              'Gudang KIG Q',
+              'Gudang KIG FB',
+              'Gudang KIG Beton'
+            ].map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
                 child: Text(value),
@@ -108,14 +137,11 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
           ),
           SizedBox(height: 16.0),
           ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.amber,
-                  ),
-            child: Text('Tampilkan',
-            style: TextStyle(color: Colors.white))
-            
-          ),
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.amber,
+              ),
+              child: Text('Tampilkan', style: TextStyle(color: Colors.white))),
           SizedBox(height: 16.0),
           _buildDataTable(),
         ],
@@ -123,7 +149,7 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
     );
   }
 
-  Widget _buildPerformaProdukTab(){
+  Widget _buildPerformaProdukTab() {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -139,8 +165,13 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
                 _selectedWarehouse = newValue;
               });
             },
-            items: <String>['Gudang Multiguna 1', 'Gudang Multiguna 2', 'Gudang KIG Q', 'Gudang KIG FB', 'Gudang KIG Beton']
-                .map<DropdownMenuItem<String>>((String value) {
+            items: <String>[
+              'Gudang Multiguna 1',
+              'Gudang Multiguna 2',
+              'Gudang KIG Q',
+              'Gudang KIG FB',
+              'Gudang KIG Beton'
+            ].map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
                 child: Text(value),
@@ -171,8 +202,10 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
             onPressed: () {},
-            child: Text('Tampilkan',
-            style: TextStyle(color: Colors.white),),
+            child: Text(
+              'Tampilkan',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
           SizedBox(height: 16.0),
           _buildDataTablePerform(),
@@ -181,7 +214,7 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
     );
   }
 
-    Widget _buildBookedAreaTab() {
+  Widget _buildBookedAreaTab() {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -196,81 +229,82 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: DataTable(
-      headingRowColor: MaterialStateColor.resolveWith((states) => Colors.amber),
-      columns: [
-        DataColumn(label: Text('Produk')),
-        DataColumn(label: Text('Stock Awal')),
-        DataColumn(label: Text('Produksi')),
-        DataColumn(label: Text('Gudang Penyangga')),
-        DataColumn(label: Text('Ex Impor')),
-        DataColumn(label: Text('Gudang Internal')),
-      ],
-      rows: [
-        DataRow(cells: [
-          DataCell(Text('NPK PHONSKA PLUS @25KG')),
-          DataCell(Text('6,986.375')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-        ]),
-        DataRow(cells: [
-          DataCell(Text('NPK 15-10-12 Sub @50KG')),
-          DataCell(Text('13,086.700')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-        ]),
-        DataRow(cells: [
-          DataCell(Text('Urea SUB @50 KG')),
-          DataCell(Text('11,208.000')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-        ]),
-        DataRow(cells: [
-          DataCell(Text('SP 26 NS @25KG')),
-          DataCell(Text('16,370.200')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-        ]),
-        DataRow(cells: [
-          DataCell(Text('Nitralite NS @25KG')),
-          DataCell(Text('1,527.875')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-        ]),
-        DataRow(cells: [
-          DataCell(Text('UREA PRL NS @5KG')),
-          DataCell(Text('602.675')),
-          DataCell(Text('37.000')),
-          DataCell(Text('37.000')),
-          DataCell(Text('37.000')),
-          DataCell(Text('37.000')),
-        ]),
-        DataRow(cells: [
-          DataCell(Text('Nitralite NS @25KG')),
-          DataCell(Text('64.400')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-        ]),
-        DataRow(cells: [
-          DataCell(Text('UREA PRL NS @5KG')),
-          DataCell(Text('774.450')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-          DataCell(Text('0.000')),
-        ]),
-      ],
+        headingRowColor:
+            WidgetStateColor.resolveWith((states) => Colors.amber),
+        columns: [
+          DataColumn(label: Text('Produk')),
+          DataColumn(label: Text('Stock Awal')),
+          DataColumn(label: Text('Produksi')),
+          DataColumn(label: Text('Gudang Penyangga')),
+          DataColumn(label: Text('Ex Impor')),
+          DataColumn(label: Text('Gudang Internal')),
+        ],
+        rows: [
+          DataRow(cells: [
+            DataCell(Text('NPK PHONSKA PLUS @25KG')),
+            DataCell(Text('6,986.375')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('NPK 15-10-12 Sub @50KG')),
+            DataCell(Text('13,086.700')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('Urea SUB @50 KG')),
+            DataCell(Text('11,208.000')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('SP 26 NS @25KG')),
+            DataCell(Text('16,370.200')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('Nitralite NS @25KG')),
+            DataCell(Text('1,527.875')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('UREA PRL NS @5KG')),
+            DataCell(Text('602.675')),
+            DataCell(Text('37.000')),
+            DataCell(Text('37.000')),
+            DataCell(Text('37.000')),
+            DataCell(Text('37.000')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('Nitralite NS @25KG')),
+            DataCell(Text('64.400')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+          ]),
+          DataRow(cells: [
+            DataCell(Text('UREA PRL NS @5KG')),
+            DataCell(Text('774.450')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+            DataCell(Text('0.000')),
+          ]),
+        ],
       ),
     );
   }
@@ -279,7 +313,8 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: DataTable(
-        headingRowColor: MaterialStateColor.resolveWith((states) => Colors.amber),
+        headingRowColor:
+            WidgetStateColor.resolveWith((states) => Colors.amber),
         columns: [
           DataColumn(label: Text('No')),
           DataColumn(label: Text('Produk')),
@@ -315,11 +350,12 @@ class _ProductPageState extends State<ProductPage> with SingleTickerProviderStat
       ),
     );
   }
+
   Widget _buildBookedAreaTable() {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: DataTable(
-        headingRowColor: MaterialStateColor.resolveWith((states) => Colors.amber),
+        headingRowColor: WidgetStateColor.resolveWith((states) => Colors.amber),
         columns: [
           DataColumn(label: Text('No')),
           DataColumn(label: Text('Tanggal')),

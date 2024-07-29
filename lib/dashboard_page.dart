@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:gudanng3/absensi_page.dart';
+import 'package:gudanng3/newsevent_page.dart';
 import 'package:gudanng3/product_page.dart';
+import 'package:gudanng3/reportshiftpage.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
-  _DashboardPageState createState() => _DashboardPageState();
+  State<DashboardPage> createState() => _DashboardPageState();
 }
 
 class _DashboardPageState extends State<DashboardPage> {
@@ -17,7 +20,7 @@ class _DashboardPageState extends State<DashboardPage> {
     });
   }
 
- /*  void _showPetugasHariIni(BuildContext context) {
+  /*  void _showPetugasHariIni(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -113,682 +116,695 @@ Widget _buildInfoRow(String title, String content) {
   );
 } */
 
-String _getTitle(){
-  switch (_selectedIndex) {
-  case 0:
-  return 'Absensi';
-  case 1:
-  return 'News & Event';
-  case 2:
-  return 'Dashboard';
-  case 3:
-  return 'Produk';
-  case 4:
-  return 'Report';
-  default:
-  return '';
-}
-}
+  String _getTitle() {
+    switch (_selectedIndex) {
+      case 0:
+        return 'Absensi';
+      case 1:
+        return 'News & Event';
+      case 2:
+        return 'Dashboard';
+      case 3:
+        return 'Produk';
+      case 4:
+        return 'Report';
+      default:
+        return '';
+    }
+  }
 
   // Daftar halaman yang ditampilkan berdasarkan item yang dipilih
   List<Widget> _pages(BuildContext context) {
     return [
-    Center(child: Text('Absensi Page')),
-    Center(child: Text('News & Event Page')),
-    SingleChildScrollView(
-      padding: EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          Text(
-            _getTitle(),
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            textAlign: TextAlign.left,
-          ),
-          // Card untuk Agenda Bagian III
-          Card(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
+      AbsensiPage(),
+      NewsAndEventPage(),
+      SingleChildScrollView(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Text(
+              _getTitle(),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.left,
             ),
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Agenda Bagian III Hari Ini',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.teal,
+            // Card untuk Agenda Bagian III
+            Card(
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Agenda Bagian III Hari Ini',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.teal,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Rabu, 20 Maret 2024',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.grey,
+                        Text(
+                          'Rabu, 20 Maret 2024',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: Colors.grey,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16),
-                  Table(
-                    columnWidths: {
-                      0: FlexColumnWidth(1),
-                      1: FlexColumnWidth(3),
-                      2: FlexColumnWidth(2),
-                      3: FlexColumnWidth(2),
-                    },
-                    children: [
-                      TableRow(children: [
-                        Center(
-                            child: Text('Waktu',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold))),
-                        Center(
-                            child: Text('Agenda',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold))),
-                        Center(
-                            child: Text('Personel',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold))),
-                        Center(
-                            child: Text('Tempat',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold))),
-                      ]),
-                      TableRow(children: [
-                        Center(
-                            child: Text('08:00 - 09:00',
-                                style: TextStyle(fontSize: 10))),
-                        Center(
-                            child: Text('Daily Meeting\nPergudangan',
-                                style: TextStyle(fontSize: 10))),
-                        Center(
-                            child: Text('Aminudin',
-                                style: TextStyle(fontSize: 10))),
-                        Center(
-                            child: Text('Zoom Meetings',
-                                style: TextStyle(fontSize: 10))),
-                      ]),
-                      TableRow(children: [
-                        Center(
-                            child: Text('08:00 - 09:00',
-                                style: TextStyle(fontSize: 10))),
-                        Center(
-                            child: Text('Daily Meeting\nPergudangan',
-                                style: TextStyle(fontSize: 10))),
-                        Center(
-                            child: Text('Aminudin',
-                                style: TextStyle(fontSize: 10))),
-                        Center(
-                            child: Text('Zoom Meetings',
-                                style: TextStyle(fontSize: 10))),
-                      ]),
-                      TableRow(children: [
-                        Center(
-                            child: Text('08:00 - 09:00',
-                                style: TextStyle(fontSize: 10))),
-                        Center(
-                            child: Text('Daily Meeting\nPergudangan',
-                                style: TextStyle(fontSize: 10))),
-                        Center(
-                            child: Text('Aminudin',
-                                style: TextStyle(fontSize: 10))),
-                        Center(
-                            child: Text('Zoom Meetings',
-                                style: TextStyle(fontSize: 10))),
-                      ]),
-                      TableRow(children: [
-                        Center(
-                            child: Text('08:00 - 09:00',
-                                style: TextStyle(fontSize: 10))),
-                        Center(
-                            child: Text('Daily Meeting\nPergudangan',
-                                style: TextStyle(fontSize: 10))),
-                        Center(
-                            child: Text('Aminudin',
-                                style: TextStyle(fontSize: 10))),
-                        Center(
-                            child: Text('Zoom Meetings',
-                                style: TextStyle(fontSize: 10))),
-                      ]),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    Table(
+                      columnWidths: {
+                        0: FlexColumnWidth(1),
+                        1: FlexColumnWidth(3),
+                        2: FlexColumnWidth(2),
+                        3: FlexColumnWidth(2),
+                      },
+                      children: [
+                        TableRow(children: [
+                          Center(
+                              child: Text('Waktu',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold))),
+                          Center(
+                              child: Text('Agenda',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold))),
+                          Center(
+                              child: Text('Personel',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold))),
+                          Center(
+                              child: Text('Tempat',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold))),
+                        ]),
+                        TableRow(children: [
+                          Center(
+                              child: Text('08:00 - 09:00',
+                                  style: TextStyle(fontSize: 10))),
+                          Center(
+                              child: Text('Daily Meeting\nPergudangan',
+                                  style: TextStyle(fontSize: 10))),
+                          Center(
+                              child: Text('Aminudin',
+                                  style: TextStyle(fontSize: 10))),
+                          Center(
+                              child: Text('Zoom Meetings',
+                                  style: TextStyle(fontSize: 10))),
+                        ]),
+                        TableRow(children: [
+                          Center(
+                              child: Text('08:00 - 09:00',
+                                  style: TextStyle(fontSize: 10))),
+                          Center(
+                              child: Text('Daily Meeting\nPergudangan',
+                                  style: TextStyle(fontSize: 10))),
+                          Center(
+                              child: Text('Aminudin',
+                                  style: TextStyle(fontSize: 10))),
+                          Center(
+                              child: Text('Zoom Meetings',
+                                  style: TextStyle(fontSize: 10))),
+                        ]),
+                        TableRow(children: [
+                          Center(
+                              child: Text('08:00 - 09:00',
+                                  style: TextStyle(fontSize: 10))),
+                          Center(
+                              child: Text('Daily Meeting\nPergudangan',
+                                  style: TextStyle(fontSize: 10))),
+                          Center(
+                              child: Text('Aminudin',
+                                  style: TextStyle(fontSize: 10))),
+                          Center(
+                              child: Text('Zoom Meetings',
+                                  style: TextStyle(fontSize: 10))),
+                        ]),
+                        TableRow(children: [
+                          Center(
+                              child: Text('08:00 - 09:00',
+                                  style: TextStyle(fontSize: 10))),
+                          Center(
+                              child: Text('Daily Meeting\nPergudangan',
+                                  style: TextStyle(fontSize: 10))),
+                          Center(
+                              child: Text('Aminudin',
+                                  style: TextStyle(fontSize: 10))),
+                          Center(
+                              child: Text('Zoom Meetings',
+                                  style: TextStyle(fontSize: 10))),
+                        ]),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          SizedBox(height: 5),
-           /* GestureDetector(
+            SizedBox(height: 5),
+            /* GestureDetector(
                     onTap: () {
                       _showPetugasHariIni(context);
                     },
                   ), */
-          // Card untuk Petugas Hari Ini
-          Card(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Petugas Hari Ini',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.teal,
+            // Card untuk Petugas Hari Ini
+            Card(
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Petugas Hari Ini',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.teal,
+                              ),
                             ),
+                            Text(
+                              '20 Maret 2024 (Shift 1)',
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 4.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          Text(
-                            '20 Maret 2024 (Shift 1)',
+                          child: Text(
+                            'Grup D',
                             style: TextStyle(
                               fontSize: 10,
-                              color: Colors.grey,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ],
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 4.0),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(8),
                         ),
-                        child: Text(
-                          'Grup D',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 5),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Foreman',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              'Lendy Tri',
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Loket',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              'Faisol Yunaedi',
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Checker',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              'M. Hidayat Fanani\nM. Ustanul Arifin\nDavid Ardiansyah\nSimon M. K. W',
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(height: 16),
-          // Card untuk Grafik (Placeholder)
-          Card(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Utilisasi Kapasitas Gudang Internal Area 3',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.teal,
+                      ],
                     ),
-                  ),
-                  SizedBox(height: 16),
-                  SizedBox(
-                    height: 200,
-                    child: BarChart(
-                      BarChartData(
-                        alignment: BarChartAlignment.spaceAround,
-                        maxY: 55000,
-                        barGroups: [
-                          BarChartGroupData(
-                            x: 0,
-                            barRods: [
-                              BarChartRodData(toY: 50000, color: Colors.blue),
-                              BarChartRodData(toY: 7976, color: Colors.orange),
-                              BarChartRodData(toY: 42024, color: Colors.green),
-                            ],
-                          ),
-                          BarChartGroupData(
-                            x: 1,
-                            barRods: [
-                              BarChartRodData(toY: 50000, color: Colors.blue),
-                              BarChartRodData(toY: 26951, color: Colors.orange),
-                              BarChartRodData(toY: 23049, color: Colors.green),
-                            ],
-                          ),
-                          BarChartGroupData(
-                            x: 2,
-                            barRods: [
-                              BarChartRodData(toY: 50000, color: Colors.blue),
-                              BarChartRodData(toY: 4898, color: Colors.orange),
-                              BarChartRodData(toY: 45102, color: Colors.green),
-                            ],
-                          ),
-                          BarChartGroupData(
-                            x: 3,
-                            barRods: [
-                              BarChartRodData(toY: 50000, color: Colors.blue),
-                              BarChartRodData(toY: 26648, color: Colors.orange),
-                              BarChartRodData(toY: 23352, color: Colors.green),
-                            ],
-                          ),
-                          BarChartGroupData(
-                            x: 4,
-                            barRods: [
-                              BarChartRodData(toY: 50000, color: Colors.blue),
-                              BarChartRodData(toY: 12620, color: Colors.orange),
-                              BarChartRodData(toY: 37380, color: Colors.green),
-                            ],
-                          ),
-                        ],
-                        titlesData: FlTitlesData(
-                          topTitles: AxisTitles(
-                            sideTitles: SideTitles(showTitles: false),
-                          ),
-                          leftTitles: AxisTitles(
-                            sideTitles: SideTitles(showTitles: false),
-                          ),
-                          bottomTitles: AxisTitles(
-                            sideTitles: SideTitles(
-                              showTitles: true,
-                              getTitlesWidget: (value, meta) {
-                                String text = '';
-                                switch (value.toInt()) {
-                                  case 0:
-                                    text = 'GBB A';
-                                  case 1:
-                                    text = 'GBB B';
-                                  case 2:
-                                    text = 'GBB C';
-                                  case 3:
-                                    text = 'GMG I';
-                                  case 4:
-                                    text = 'GMG II';
-                                }
-                                return Text(text);
-                              },
-                            ),
-                          ),
-                        ),
-                        borderData: FlBorderData(show: false),
-                        gridData: FlGridData(show: false),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(height: 16),
-          // Card Gudang Eksternal
-          Card(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Utilisasi Kapasitas Gudang External Area 3',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.teal,
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  SizedBox(
-                    height: 200,
-                    child: BarChart(
-                      BarChartData(
-                        alignment: BarChartAlignment.spaceAround,
-                        maxY: 55000,
-                        barGroups: [
-                          BarChartGroupData(
-                            x: 0,
-                            barRods: [
-                              BarChartRodData(toY: 50000, color: Colors.blue),
-                              BarChartRodData(toY: 7976, color: Colors.orange),
-                              BarChartRodData(toY: 42024, color: Colors.green),
-                            ],
-                          ),
-                          BarChartGroupData(
-                            x: 1,
-                            barRods: [
-                              BarChartRodData(toY: 50000, color: Colors.blue),
-                              BarChartRodData(toY: 26951, color: Colors.orange),
-                              BarChartRodData(toY: 23049, color: Colors.green),
-                            ],
-                          ),
-                          BarChartGroupData(
-                            x: 2,
-                            barRods: [
-                              BarChartRodData(toY: 50000, color: Colors.blue),
-                              BarChartRodData(toY: 4898, color: Colors.orange),
-                              BarChartRodData(toY: 45102, color: Colors.green),
-                            ],
-                          ),
-                        ],
-                        titlesData: FlTitlesData(
-                          topTitles: AxisTitles(
-                            sideTitles: SideTitles(showTitles: false),
-                          ),
-                          leftTitles: AxisTitles(
-                            sideTitles: SideTitles(showTitles: false),
-                          ),
-                          bottomTitles: AxisTitles(
-                            sideTitles: SideTitles(
-                              showTitles: true,
-                              getTitlesWidget: (value, meta) {
-                                String text = '';
-                                switch (value.toInt()) {
-                                  case 0:
-                                    text = 'KIG Beton';
-                                  case 1:
-                                    text = 'KIG FB';
-                                  case 2:
-                                    text = 'KIG Q';
-                                }
-                                return Text(text);
-                              },
-                            ),
-                          ),
-                        ),
-                        borderData: FlBorderData(show: false),
-                        gridData: FlGridData(show: false),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(height: 16),
-          // Card Shipping In/Out
-          Card(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Shipping In and Shipping Out',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.teal,
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  SizedBox(
-                    height: 300,
-                    child: LineChart(
-                      LineChartData(
-                        titlesData: FlTitlesData(
-                          topTitles: AxisTitles(
-                            sideTitles: SideTitles(showTitles: false),
-                          ),
-                          bottomTitles: AxisTitles(
-                            sideTitles: SideTitles(
-                              showTitles: true,
-                              reservedSize: 22,
-                              interval: 1,
-                              getTitlesWidget: (value, meta) {
-                                const style = TextStyle(
-                                  color: Color(0xff68737d),
-                                  fontWeight: FontWeight.bold,
+                    SizedBox(height: 5),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Foreman',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                'Lendy Tri',
+                                style: TextStyle(
                                   fontSize: 10,
-                                );
-                                switch (value.toInt()) {
-                                  case 0:
-                                    return Text('20/03', style: style);
-                                  case 1:
-                                    return Text('21/03', style: style);
-                                  case 2:
-                                    return Text('22/03', style: style);
-                                  case 3:
-                                    return Text('23/03', style: style);
-                                  case 4:
-                                    return Text('24/03', style: style);
-                                  default:
-                                    return Container();
-                                }
-                              },
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Loket',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                'Faisol Yunaedi',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Checker',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                'M. Hidayat Fanani\nM. Ustanul Arifin\nDavid Ardiansyah\nSimon M. K. W',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 16),
+            // Card untuk Grafik (Placeholder)
+            Card(
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Utilisasi Kapasitas Gudang Internal Area 3',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal,
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    SizedBox(
+                      height: 200,
+                      child: BarChart(
+                        BarChartData(
+                          alignment: BarChartAlignment.spaceAround,
+                          maxY: 55000,
+                          barGroups: [
+                            BarChartGroupData(
+                              x: 0,
+                              barRods: [
+                                BarChartRodData(toY: 50000, color: Colors.blue),
+                                BarChartRodData(
+                                    toY: 7976, color: Colors.orange),
+                                BarChartRodData(
+                                    toY: 42024, color: Colors.green),
+                              ],
+                            ),
+                            BarChartGroupData(
+                              x: 1,
+                              barRods: [
+                                BarChartRodData(toY: 50000, color: Colors.blue),
+                                BarChartRodData(
+                                    toY: 26951, color: Colors.orange),
+                                BarChartRodData(
+                                    toY: 23049, color: Colors.green),
+                              ],
+                            ),
+                            BarChartGroupData(
+                              x: 2,
+                              barRods: [
+                                BarChartRodData(toY: 50000, color: Colors.blue),
+                                BarChartRodData(
+                                    toY: 4898, color: Colors.orange),
+                                BarChartRodData(
+                                    toY: 45102, color: Colors.green),
+                              ],
+                            ),
+                            BarChartGroupData(
+                              x: 3,
+                              barRods: [
+                                BarChartRodData(toY: 50000, color: Colors.blue),
+                                BarChartRodData(
+                                    toY: 26648, color: Colors.orange),
+                                BarChartRodData(
+                                    toY: 23352, color: Colors.green),
+                              ],
+                            ),
+                            BarChartGroupData(
+                              x: 4,
+                              barRods: [
+                                BarChartRodData(toY: 50000, color: Colors.blue),
+                                BarChartRodData(
+                                    toY: 12620, color: Colors.orange),
+                                BarChartRodData(
+                                    toY: 37380, color: Colors.green),
+                              ],
+                            ),
+                          ],
+                          titlesData: FlTitlesData(
+                            topTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false),
+                            ),
+                            leftTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false),
+                            ),
+                            bottomTitles: AxisTitles(
+                              sideTitles: SideTitles(
+                                showTitles: true,
+                                getTitlesWidget: (value, meta) {
+                                  String text = '';
+                                  switch (value.toInt()) {
+                                    case 0:
+                                      text = 'GBB A';
+                                    case 1:
+                                      text = 'GBB B';
+                                    case 2:
+                                      text = 'GBB C';
+                                    case 3:
+                                      text = 'GMG I';
+                                    case 4:
+                                      text = 'GMG II';
+                                  }
+                                  return Text(text);
+                                },
+                              ),
                             ),
                           ),
-                          leftTitles: AxisTitles(
-                            sideTitles: SideTitles(
-                              interval: 250,
-                              showTitles: false,
-                              getTitlesWidget: (value, meta) {
-                                return Text(
-                                  value.toInt().toString(),
-                                  style: TextStyle(
+                          borderData: FlBorderData(show: false),
+                          gridData: FlGridData(show: false),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 16),
+            // Card Gudang Eksternal
+            Card(
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Utilisasi Kapasitas Gudang External Area 3',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal,
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    SizedBox(
+                      height: 200,
+                      child: BarChart(
+                        BarChartData(
+                          alignment: BarChartAlignment.spaceAround,
+                          maxY: 55000,
+                          barGroups: [
+                            BarChartGroupData(
+                              x: 0,
+                              barRods: [
+                                BarChartRodData(toY: 50000, color: Colors.blue),
+                                BarChartRodData(
+                                    toY: 7976, color: Colors.orange),
+                                BarChartRodData(
+                                    toY: 42024, color: Colors.green),
+                              ],
+                            ),
+                            BarChartGroupData(
+                              x: 1,
+                              barRods: [
+                                BarChartRodData(toY: 50000, color: Colors.blue),
+                                BarChartRodData(
+                                    toY: 26951, color: Colors.orange),
+                                BarChartRodData(
+                                    toY: 23049, color: Colors.green),
+                              ],
+                            ),
+                            BarChartGroupData(
+                              x: 2,
+                              barRods: [
+                                BarChartRodData(toY: 50000, color: Colors.blue),
+                                BarChartRodData(
+                                    toY: 4898, color: Colors.orange),
+                                BarChartRodData(
+                                    toY: 45102, color: Colors.green),
+                              ],
+                            ),
+                          ],
+                          titlesData: FlTitlesData(
+                            topTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false),
+                            ),
+                            leftTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false),
+                            ),
+                            bottomTitles: AxisTitles(
+                              sideTitles: SideTitles(
+                                showTitles: true,
+                                getTitlesWidget: (value, meta) {
+                                  String text = '';
+                                  switch (value.toInt()) {
+                                    case 0:
+                                      text = 'KIG Beton';
+                                    case 1:
+                                      text = 'KIG FB';
+                                    case 2:
+                                      text = 'KIG Q';
+                                  }
+                                  return Text(text);
+                                },
+                              ),
+                            ),
+                          ),
+                          borderData: FlBorderData(show: false),
+                          gridData: FlGridData(show: false),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 16),
+            // Card Shipping In/Out
+            Card(
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Shipping In and Shipping Out',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal,
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    SizedBox(
+                      height: 300,
+                      child: LineChart(
+                        LineChartData(
+                          titlesData: FlTitlesData(
+                            topTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false),
+                            ),
+                            bottomTitles: AxisTitles(
+                              sideTitles: SideTitles(
+                                showTitles: true,
+                                reservedSize: 22,
+                                interval: 1,
+                                getTitlesWidget: (value, meta) {
+                                  const style = TextStyle(
                                     color: Color(0xff68737d),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 10,
-                                  ),
-                                );
-                              },
-                              reservedSize: 28,
+                                  );
+                                  switch (value.toInt()) {
+                                    case 0:
+                                      return Text('20/03', style: style);
+                                    case 1:
+                                      return Text('21/03', style: style);
+                                    case 2:
+                                      return Text('22/03', style: style);
+                                    case 3:
+                                      return Text('23/03', style: style);
+                                    case 4:
+                                      return Text('24/03', style: style);
+                                    default:
+                                      return Container();
+                                  }
+                                },
+                              ),
+                            ),
+                            leftTitles: AxisTitles(
+                              sideTitles: SideTitles(
+                                interval: 250,
+                                showTitles: false,
+                                getTitlesWidget: (value, meta) {
+                                  return Text(
+                                    value.toInt().toString(),
+                                    style: TextStyle(
+                                      color: Color(0xff68737d),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10,
+                                    ),
+                                  );
+                                },
+                                reservedSize: 28,
+                              ),
                             ),
                           ),
-                        ),
-                        gridData: FlGridData(show: true),
-                        borderData: FlBorderData(
-                          show: true,
-                          border: Border.all(
-                              color: const Color(0xff68737d), width: 1),
-                        ),
-                        lineBarsData: [
-                          LineChartBarData(
-                            spots: [
-                              FlSpot(0, 750),
-                              FlSpot(1, 848.9),
-                              FlSpot(2, 250),
-                              FlSpot(3, 498),
-                              FlSpot(4, 320),
-                            ],
-                            isCurved: true,
-                            color: Colors.teal,
-                            barWidth: 4,
-                            belowBarData: BarAreaData(show: false),
+                          gridData: FlGridData(show: true),
+                          borderData: FlBorderData(
+                            show: true,
+                            border: Border.all(
+                                color: const Color(0xff68737d), width: 1),
                           ),
-                          LineChartBarData(
-                            spots: [
-                              FlSpot(0, 739.9),
-                              FlSpot(1, 575.3),
-                              FlSpot(2, 804),
-                              FlSpot(3, 570),
-                              FlSpot(4, 420),
-                            ],
-                            isCurved: true,
-                            color: Colors.orange,
-                            barWidth: 4,
-                            belowBarData: BarAreaData(show: false),
-                          ),
-                        ],
+                          lineBarsData: [
+                            LineChartBarData(
+                              spots: [
+                                FlSpot(0, 750),
+                                FlSpot(1, 848.9),
+                                FlSpot(2, 250),
+                                FlSpot(3, 498),
+                                FlSpot(4, 320),
+                              ],
+                              isCurved: true,
+                              color: Colors.teal,
+                              barWidth: 4,
+                              belowBarData: BarAreaData(show: false),
+                            ),
+                            LineChartBarData(
+                              spots: [
+                                FlSpot(0, 739.9),
+                                FlSpot(1, 575.3),
+                                FlSpot(2, 804),
+                                FlSpot(3, 570),
+                                FlSpot(4, 420),
+                              ],
+                              isCurved: true,
+                              color: Colors.orange,
+                              barWidth: 4,
+                              belowBarData: BarAreaData(show: false),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Indicator(color: Colors.teal, text: 'Shipping In (Ton)'),
-                      SizedBox(width: 10),
-                      Indicator(
-                          color: Colors.orange, text: 'Shipping Out (Ton)')
-                    ],
-                  )
-                ],
+                    SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Indicator(
+                            color: Colors.teal, text: 'Shipping In (Ton)'),
+                        SizedBox(width: 10),
+                        Indicator(
+                            color: Colors.orange, text: 'Shipping Out (Ton)')
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-          Card(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0)),
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Total Stok Seluruh Produk',
-                    style: TextStyle(
-                      color: Colors.teal,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  Container(
-                    height: 300,
-                    child: PieChart(
-                      PieChartData(
-                        sections: showingSections(),
-                        sectionsSpace: 2,
-                        centerSpaceRadius: 40,
+            Card(
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Total Stok Seluruh Produk',
+                      style: TextStyle(
+                        color: Colors.teal,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                  SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Indicator(color: Colors.blue, text: 'Phonska Oca'),
-                      SizedBox(width: 10),
-                      Indicator(color: Colors.red, text: 'NPK'),
-                      SizedBox(width: 10),
-                      Indicator(color: Colors.green, text: 'UREA'),
-                      SizedBox(width: 10),
-                      Indicator(color: Colors.yellow, text: 'SP'),
-                    ],
-                  ),
-                ],
+                    SizedBox(height: 16),
+                    SizedBox(
+                      height: 300,
+                      child: PieChart(
+                        PieChartData(
+                          sections: showingSections(),
+                          sectionsSpace: 2,
+                          centerSpaceRadius: 40,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Indicator(color: Colors.blue, text: 'Phonska Oca'),
+                        SizedBox(width: 10),
+                        Indicator(color: Colors.red, text: 'NPK'),
+                        SizedBox(width: 10),
+                        Indicator(color: Colors.green, text: 'UREA'),
+                        SizedBox(width: 10),
+                        Indicator(color: Colors.yellow, text: 'SP'),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-    ProductPage(),
-    Center(child: Text('Report Page')),
-  ];
+      ProductPage(),
+      ReportShiftPage(),
+    ];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.person),
-          onPressed: () {
-            }
-        ),
+        leading: IconButton(icon: Icon(Icons.person), onPressed: () {}),
         backgroundColor: Colors.white,
         actions: [
           IconButton(
@@ -803,9 +819,10 @@ String _getTitle(){
         backgroundColor: Colors.orangeAccent,
         type: BottomNavigationBarType.fixed,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.access_time), label: 'Absensi'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.event), label: 'News & Event'), 
+              icon: Icon(Icons.access_time), label: 'Absensi'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.event), label: 'News & Event'),
           BottomNavigationBarItem(
               icon: Icon(Icons.dashboard), label: 'Dashboard'),
           BottomNavigationBarItem(
