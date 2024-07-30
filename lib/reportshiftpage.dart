@@ -7,24 +7,15 @@ class ReportShiftPage extends StatefulWidget {
 }
 
 class _ReportShiftPageState extends State<ReportShiftPage> {
-  int _selectedIndex = 4;
   int entriesPerPage = 10;
 
   String _getTitle() {
-    switch (_selectedIndex) {
-      case 0:
-        return 'Absensi';
-      case 1:
-        return 'News & Event';
-      case 2:
-        return 'Dashboard';
-      case 3:
-        return 'Produk';
-      case 4:
-        return 'Report';
-      default:
-        return '';
-    }
+    return 'Report Shift';
+  }
+
+  void _navigateToDetailReportPage(BuildContext context) {
+    Navigator.push(
+      context, MaterialPageRoute(builder: (context) => DetailReportShiftPage()),);
   }
 
   @override
@@ -105,10 +96,7 @@ class _ReportShiftPageState extends State<ReportShiftPage> {
                           icon: Icon(Icons.visibility),
                           color: Colors.orange,
                           onPressed: () {
-                            Navigator.push(
-                              context, 
-                              MaterialPageRoute(builder: (context)=> DetailReportShiftPage())
-                            );
+                            _navigateToDetailReportPage(context);
                           },
                         )),
                       ],

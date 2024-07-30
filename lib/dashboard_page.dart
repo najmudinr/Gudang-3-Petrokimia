@@ -13,13 +13,6 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   int _selectedIndex = 2; // Mengelola indeks item yang dipilih
 
-  // Fungsi untuk menangani perubahan item yang dipilih
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   /*  void _showPetugasHariIni(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -800,6 +793,13 @@ Widget _buildInfoRow(String title, String content) {
     ];
   }
 
+  // Fungsi untuk menangani perubahan item yang dipilih
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -813,11 +813,15 @@ Widget _buildInfoRow(String title, String content) {
           )
         ],
       ),
-      body: _pages(context)[
-          _selectedIndex], // Menampilkan halaman berdasarkan item yang dipilih
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _pages(context),
+      ), // Menampilkan halaman berdasarkan item yang dipilih
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.orangeAccent,
         type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.access_time), label: 'Absensi'),
@@ -829,10 +833,8 @@ Widget _buildInfoRow(String title, String content) {
               icon: Icon(Icons.shopping_cart), label: 'Product'),
           BottomNavigationBarItem(icon: Icon(Icons.report), label: 'Report'),
         ],
-        currentIndex: _selectedIndex,
         selectedItemColor: Colors.teal,
         unselectedItemColor: Colors.white,
-        onTap: _onItemTapped,
       ),
     );
   }
