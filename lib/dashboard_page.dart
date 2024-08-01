@@ -5,6 +5,48 @@ import 'package:gudanng3/newsevent_page.dart';
 import 'package:gudanng3/product_page.dart';
 import 'package:gudanng3/reportshiftpage.dart';
 
+
+class BottomNavBar extends StatelessWidget {
+  final int currentIndex;
+  final Function(int) onTap;
+
+  BottomNavBar({required this.currentIndex, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      backgroundColor: Colors.orangeAccent,
+      type: BottomNavigationBarType.fixed,
+      currentIndex: currentIndex,
+      onTap: onTap,
+      items: [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.access_time),
+          label: 'Absensi',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.event),
+          label: 'News & Event',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.dashboard),
+          label: 'Dashboard',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.shopping_cart),
+          label: 'Product',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.report),
+          label: 'Report',
+        ),
+      ],
+      selectedItemColor: Colors.teal,
+      unselectedItemColor: Colors.white,
+    );
+  }
+}
+
 class DashboardPage extends StatefulWidget {
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -817,24 +859,9 @@ Widget _buildInfoRow(String title, String content) {
         index: _selectedIndex,
         children: _pages(context),
       ), // Menampilkan halaman berdasarkan item yang dipilih
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.orangeAccent,
-        type: BottomNavigationBarType.fixed,
+      bottomNavigationBar: BottomNavBar(
         currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.access_time), label: 'Absensi'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.event), label: 'News & Event'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard), label: 'Dashboard'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart), label: 'Product'),
-          BottomNavigationBarItem(icon: Icon(Icons.report), label: 'Report'),
-        ],
-        selectedItemColor: Colors.teal,
-        unselectedItemColor: Colors.white,
+        onTap: _onItemTapped
       ),
     );
   }
